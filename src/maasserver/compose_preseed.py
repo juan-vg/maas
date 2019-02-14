@@ -126,7 +126,7 @@ def get_archive_config(request, node, preserve_sources=False):
     # Process the default Ubuntu Archives or Mirror.
     archives = {}
     archives['apt'] = {}
-    archives['apt']['preserve_sources_list'] = preserve_sources
+    archives['apt']['preserve_sources_list'] = True if node.osystem == 'custom' else preserve_sources
     # Always generate a custom list of repositories. deb-src is enabled in the
     # ephemeral environment due to the cloud-init template having it enabled.
     # It is disabled in a deployed environment due to the Curtin template
@@ -156,7 +156,7 @@ def get_archive_config(request, node, preserve_sources=False):
             urls += 'deb-src %s $RELEASE-%s %s\n' % (
                 archive.url, pocket, ' '.join(components))
 
-    archives['apt']['sources_list'] = urls
+    archives['apt']['sources_list'] = '' if node.osystem == 'custom' else urls
 
     if apt_proxy:
         archives['apt']['proxy'] = apt_proxy

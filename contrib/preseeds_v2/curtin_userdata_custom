@@ -1,4 +1,12 @@
 #cloud-config
+early_commands:
+  000_update_repositories: apt update
+  010_install_apt_https: apt install -y apt-transport-https
+
+kernel:
+  fallback-package: linux-image-amd64
+  package: linux-image-amd64
+  
 debconf_selections:
  maas: |
   {{for line in str(curtin_preseed).splitlines()}}

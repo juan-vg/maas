@@ -7,6 +7,8 @@ menuentry 'Local' {
             boot/bootx64.efi \
             ubuntu/shimx64.efi \
             ubuntu/grubx64.efi \
+            debian/shimx64.efi \
+            debian/grubx64.efi \
             centos/shimx64.efi \
             centos/grubx64.efi \
             rhel/shimx64.efi \
